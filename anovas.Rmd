@@ -1,20 +1,36 @@
-rm(list = ls())
+---
+title: "Reportes"
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 source("functions.R")
 
-###Data
 blood <- read_excel("data/Base de datos.xlsx")
+```
 
-###Hemoglobin
-#data
+# Proyecto: Sangre total -- FVL-2019/20
+#### Statistics analysis: V.1.0 Date: 16-01-2020
+#### @author: Edgar Yaset Caicedo -- https://github.com/yaset
 
+## Hemoglobina
+
+### Description
+```{r , echo = FALSE }
 Hb <- data_base("Hb")
-resume(Hb)
+round(resume(Hb),2)
+```
+
+### Prueba de ANOVA
+
+```{r, echo= FALSE}
 anova_te(Hb)
-
-
-###Graphic
 data2 <- resume(Hb)
-p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -26,21 +42,23 @@ p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/hemoglobin.png",
-    width = 750, height = 500)
-p1
-dev.off()
 
-Hb <- data_base("Hb")
-resume(Hb)
-anova_te(Hb)
+```
 
+## Hematocrito
 
-###Graphic
-
+### Description
+```{r , echo = FALSE }
 Hto <- data_base("Hcto")
+round(resume(Hto),2)
+```
+
+### Prueba de ANOVA
+
+```{r, echo= FALSE}
+anova_te(Hto)
 data2 <- resume(Hto)
-p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -52,16 +70,24 @@ p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/hcto.png",
-    width = 750, height = 500)
-p1
-dev.off()
+
+```
+
+# Plaquetas
 
 
-#Plaquetas
+### Description
+```{r , echo = FALSE }
 Plt <- data_base("Plt")
+round(resume(Plt),2)
+```
+
+### Prueba de ANOVA
+
+```{r, echo= FALSE}
+anova_te(Plt)
 data2 <- resume(Plt)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -73,15 +99,21 @@ p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/plaquetas.png",
-    width = 750, height = 500)
-p1
-dev.off()
 
-#Fibrinogeno
+```
+
+# Fibrinogeno
+### Description
+```{r , echo = FALSE }
 Fibri <- data_base("Fibri")
+round(resume(Fibri),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(Fibri)
 data2 <- resume(Fibri)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -92,17 +124,20 @@ p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   theme(axis.title.x = element_text(size = 14),
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
+```
 
-png(filename = "figures/fibri.png",
-    width = 750, height = 500)
-p1
-dev.off()
-
-######Factores
-##Factor II
+# Factor II
+### Description
+```{r , echo = FALSE }
 FII <- data_base("FII")
+round(resume(FII),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(FII)
 data2 <- resume(FII)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -114,15 +149,20 @@ p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/FII.png",
-    width = 750, height = 500)
-p1
-dev.off()
+```
 
-## Factor V
+# Factor V
+### Description
+```{r , echo = FALSE }
 FV <- data_base("\\FV\\b")
+round(resume(FV),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(FV)
 data2 <- resume(FV)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -134,15 +174,21 @@ p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/FV.png",
-    width = 750, height = 500)
-p1
-dev.off()
+```
 
-##Factor VII
+## Factor VII
+### Description
+
+```{r , echo = FALSE }
 FVII <- data_base("\\FVII\\b")
+round(resume(FVII),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(FVII)
 data2 <- resume(FVII)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -154,15 +200,21 @@ p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/FVII.png",
-    width = 750, height = 500)
-p1
-dev.off()
+```
 
-##Factor VIII
+
+# Factor VIII
+### Description
+```{r , echo = FALSE }
 FVIII <- data_base("\\FVIII\\b")
+round(resume(FVII),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(FVIII)
 data2 <- resume(FVIII)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -174,15 +226,21 @@ p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/FVIII.png",
-    width = 750, height = 500)
-p1
-dev.off()
+```
 
-##Factor IX
+
+# Factor IX
+### Description
+```{r , echo = FALSE }
 FIX <- data_base("\\FIX\\b")
+round(resume(FIX),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(FIX)
 data2 <- resume(FIX)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -194,15 +252,21 @@ p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/FIX.png",
-    width = 750, height = 500)
-p1
-dev.off()
+```
 
-##Factor X
+
+# Factor X
+### Description
+```{r , echo = FALSE }
 FX <- data_base("\\FX\\b")
+round(resume(FX),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(FX)
 data2 <- resume(FX)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -214,17 +278,20 @@ p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/FX.png",
-    width = 750, height = 500)
-p1
-dev.off()
+```
 
-
-
-##Factor XI
+# Factor XI
+### Description
+```{r , echo = FALSE }
 FXI <- data_base("\\FXI\\b")
+round(resume(FXI),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(FXI)
 data2 <- resume(FXI)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -236,15 +303,21 @@ p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/FXI.png",
-    width = 750, height = 500)
-p1
-dev.off()
+```
 
-##PCC
+
+# PCC
+### Description
+```{r , echo = FALSE }
 PCC <- data_base("\\PCC\\b")
+round(resume(PCC),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(PCC)
 data2 <- resume(PCC)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+ ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -256,7 +329,4 @@ p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
 
-png(filename = "figures/PCC.png",
-    width = 750, height = 500)
-p1
-dev.off()
+```
