@@ -1,15 +1,17 @@
-
+rm(list = ls())
 library(tidyverse)
 library(readxl)
 library(plotrix)
+library(rstatix)
+library(multcompView)
+
 blood <- read_excel("data/Base de datos.xlsx")
-
-
 
 data1 <- blood %>%
   select(`Hb 0`, `Hb 6`,
          `Hb 11`, `Hb 16`,
          `Hb 21`)
+
 data1 <- stack(data1)
 
 data1$time[data1$ind == "Hb 0"] <- 0
@@ -22,224 +24,166 @@ data1$time[data1$ind == "Hb 21"] <- 21
 data2 <- data1 %>%
   group_by(time) %>%
   summarise(mean = mean(values), sd = sd(values), es = std.error(values),
+            var = var(values),
             min = min(values), max = max(values), norm = shapiro.test(values)[[2]])
 
-
-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
-  geom_errorbar(aes(ymin = mean - es, ymax = mean + es),
-                width = 0.1)+
-  geom_point()+
+data2
+p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_point(aes(y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 1.2)+
   geom_line()+
-  ylim(c(10,16))+
+  ylim(c(0,18))+
   xlab("Days")+
-  ylab("Hemoglobin")+
-  theme_bw()
- 
-a <- glm(V1 ~ V2, data = data1)
+  ylab("Hemoglobin")
 
-
-
-
-
-###Los grados de libertad no son aca deberia ser K = 1-n
-aov(V1 ~ V2, data = data1)
-summary(aov(V1 ~ V2, data = data1))
-
-###correction de factores
-summary(aov(V1 ~ factor(V2), data = data1))
-anova(lm(V1 ~ factor(V2), data = data1))
-
-##-------------------------------
-
-blood <- as.data.frame()
-
-
-anova(lm(values ~ ind, data = Hb))
-
-
-
-
-
-
-
-
-
-
-
-
-
-######Hemoglobina
-
-blood %>%
-  summarise( h0 = mean(`Hb 0`), h0sd = sd(`Hb 0`),
-             h6 = mean(`Hb 6`), h6sd = sd(`Hb 6`),
-             h11 = mean(`Hb 11`), h11sd = sd(`Hb 11`),
-             h16 = mean(`Hb 16`), h16sd = sd(`Hb 16`),
-             h21 = mean(`Hb 21`), h21sd = sd(`Hb 21`),)
-
-a <- blood$`Plt 0`
-ks.test(a, "pnorm", mean = mean(a, na.rm = TRUE), sd = sd(a, na.rm = TRUE))
-
-a1 <- ggplot(data = blood, aes(y = `Hb 0` ))+
-  geom_boxplot()+
-  ylim(c(10,20))
-a2 <- ggplot(data = blood, aes(y = `Hb 6` ))+
-  geom_boxplot()+
-  ylim(c(10,20)) 
-a3 <- ggplot(data = blood, aes(y = `Hb 11` ))+
-  geom_boxplot()+
-  ylim(c(10,20))
-a4 <- ggplot(data = blood, aes(y = `Hb 16` ))+
-  geom_boxplot()+
-  ylim(c(10,20))
-a5 <- ggplot(data = blood, aes(y = `Hb 21` ))+
-  geom_boxplot()+
-  ylim(c(10,20))
-
-
-
-png(filename = "figures/hb.png",
+png(filename = "figures/hemoglobin.png",
     width = 750, height = 500)
-gridExtra::grid.arrange(a1,a2,a3,a4,a5, nrow= 1)
+p1
 dev.off()
 
-
-#plaquetas
-
-blood %>%
-  summarise( h0 = mean(`Plt 0`), h0sd = sd(`Plt 0`),
-             h6 = mean(`Plt 6`), h6sd = sd(`Plt 6`),
-             h11 = mean(`Plt 11`), h11sd = sd(`Plt 11`),
-             h16 = mean(`Plt 16`), h16sd = sd(`Plt 16`),
-             h21 = mean(`Plt 21`), h21sd = sd(`Plt 21`),)
+model <- lm(values ~ factor(ind), data = data1) 
+anova(model)
 
 
+#Plaquetas
 
-a <- blood$`Plt 0`
-ks.test(a, "pnorm", mean = mean(a, na.rm = TRUE), sd = sd(a, na.rm = TRUE))
+data1 <- blood %>%
+  select(`Plt 0`, `Plt 6`,
+         `Plt 11`, `Plt 16`,
+         `Plt 21`)
 
+data1 <- stack(data1)
 
-min(c(blood$`Plt 0`, blood$`Plt 6`, blood$`Plt 11`,
-      blood$`Plt 16`, blood$`Plt 21`))
-max(c(blood$`Plt 0`, blood$`Plt 6`, blood$`Plt 11`,
-      blood$`Plt 16`, blood$`Plt 21`))
-
-
-a1 <- ggplot(data = blood, aes(y = `Plt 0` ))+
-  geom_boxplot()+
-  ylim(c(20000,300000))
-a2 <- ggplot(data = blood, aes(y = `Plt 6` ))+
-  geom_boxplot()+
-  ylim(c(20000,300000))
-a3 <- ggplot(data = blood, aes(y = `Plt 11` ))+
-  geom_boxplot()+
-  ylim(c(20000,300000))
-a4 <- ggplot(data = blood, aes(y = `Plt 16` ))+
-  geom_boxplot()+
-  ylim(c(20000,300000))
-a5 <- ggplot(data = blood, aes(y = `Plt 21` ))+
-  geom_boxplot()+
-  ylim(c(20000,300000))
+data1$time[data1$ind == "Plt 0"] <- 0
+data1$time[data1$ind == "Plt 6"] <- 6
+data1$time[data1$ind == "Plt 11"] <- 11
+data1$time[data1$ind == "Plt 16"] <- 16
+data1$time[data1$ind == "Plt 21"] <- 21
 
 
+data2 <- data1 %>%
+  group_by(time) %>%
+  summarise(mean = mean(values), sd = sd(values), es = std.error(values),
+            var = var(values),
+            min = min(values), max = max(values), norm = shapiro.test(values)[[2]])
 
-png(filename = "figures/plt.png",
+data2
+p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_point(aes(y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 1.2)+
+  geom_line()+
+  ylim(c(0,250000))+
+  xlab("Days")+
+  ylab("Plaquetas")
+
+png(filename = "figures/plaquetas.png",
     width = 750, height = 500)
-gridExtra::grid.arrange(a1,a2,a3,a4,a5, nrow= 1)
+p1
 dev.off()
 
+model <- lm(values ~ ind, data = data1) 
+anov <- aov(model)
+
+TukeyHSD(anov)
+dunn_test(formula = values ~ ind, data = data1, p.adjust.method = "bonferroni")
 
 # Fibrinogeno
-blood$`Fibri 0`
 
-blood %>%
-  summarise( h0 = mean(`Fibri 0`), h0sd = sd(`Fibri 0`),
-             h6 = mean(`Fibri 6`), h6sd = sd(`Fibri 6`),
-             h11 = mean(`Fibri 11`), h11sd = sd(`Fibri 11`),
-             h16 = mean(`Fibri 16`), h16sd = sd(`Fibri 16`),
-             h21 = mean(`Fibri 21`), h21sd = sd(`Fibri 21`),)
+data1 <- blood %>%
+  select(`Fibri 0`, `Fibri 6`,
+         `Fibri 11`, `Fibri 16`,
+         `Fibri 21`)
 
+data1 <- stack(data1)
 
-
-a <- blood$`Fibri 0`
-ks.test(a, "pnorm", mean = mean(a, na.rm = TRUE), sd = sd(a, na.rm = TRUE))
-
-
-min(c(blood$`Fibri 0`, blood$`Fibri 6`, blood$`Fibri 11`,
-      blood$`Fibri 16`, blood$`Fibri 21`))
-max(c(blood$`Fibri 0`, blood$`Fibri 6`, blood$`Fibri 11`,
-      blood$`Fibri 16`, blood$`Fibri 21`))
+data1$time[data1$ind == "Fibri 0"] <- 0
+data1$time[data1$ind == "Fibri 6"] <- 6
+data1$time[data1$ind == "Fibri 11"] <- 11
+data1$time[data1$ind == "Fibri 16"] <- 16
+data1$time[data1$ind == "Fibri 21"] <- 21
 
 
-a1 <- ggplot(data = blood, aes(y = `Fibri 0` ))+
-  geom_boxplot()+
-  ylim(c(150,400))
-a2 <- ggplot(data = blood, aes(y = `Fibri 6` ))+
-  geom_boxplot()+
-  ylim(c(150,400))
-a3 <- ggplot(data = blood, aes(y = `Fibri 11` ))+
-  geom_boxplot()+
-  ylim(c(150,400))
-a4 <- ggplot(data = blood, aes(y = `Fibri 16` ))+
-  geom_boxplot()+
-  ylim(c(150,400))
-a5 <- ggplot(data = blood, aes(y = `Fibri 21` ))+
-  geom_boxplot()+
-  ylim(c(150,400))
+data2 <- data1 %>%
+  group_by(time) %>%
+  summarise(mean = mean(values), sd = sd(values), es = std.error(values),
+            var = var(values),
+            min = min(values), max = max(values), norm = shapiro.test(values)[[2]])
 
+data2
+p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_point(aes(y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 1.2)+
+  geom_line()+
+  ylim(c(0,300))+
+  xlab("Days")+
+  ylab("Plaquetas")
 
-
-png(filename = "figures/Fibri.png",
+png(filename = "figures/fibrinogeno.png",
     width = 750, height = 500)
-gridExtra::grid.arrange(a1,a2,a3,a4,a5, nrow= 1)
+p1
 dev.off()
+
+model <- lm(values ~ ind, data = data1) 
+anov <- aov(model)
+summary(anov)
+
+TukeyHSD(anov)
+dunn_test(formula = values ~ ind, data = data1, p.adjust.method = "bonferroni")
+
 
 ######Factores
 ##Factor II
-blood$`FII 0`
+
+data1 <- blood %>%
+  select(`FII 0`, `FII 6`,
+         `FII 11`, `FII 16`,
+         `FII 21`)
+
+data1 <- stack(data1)
+
+data1$time[data1$ind == "FII 0"] <- 0
+data1$time[data1$ind == "FII 6"] <- 6
+data1$time[data1$ind == "FII 11"] <- 11
+data1$time[data1$ind == "FII 16"] <- 16
+data1$time[data1$ind == "FII 21"] <- 21
 
 
-blood %>%
-  summarise( h0 = mean(`FII 0`), h0sd = sd(`FII 0`),
-             h6 = mean(`FII 6`), h6sd = sd(`FII 6`),
-             h11 = mean(`FII 11`), h11sd = sd(`FII 11`),
-             h16 = mean(`FII 16`), h16sd = sd(`FII 16`),
-             h21 = mean(`FII 21`), h21sd = sd(`FII 21`),)
+data2 <- data1 %>%
+  group_by(time) %>%
+  summarise(mean = mean(values), sd = sd(values), es = std.error(values),
+            var = var(values),
+            min = min(values), max = max(values), norm = shapiro.test(values)[[2]])
 
-
-
-a <- blood$`FII 0`
-shapiro.test(a)
-
-
-min(c(blood$`FII 0`, blood$`FII 6`, blood$`FII 11`,
-      blood$`FII 16`, blood$`FII 21`))
-max(c(blood$`FII 0`, blood$`FII 6`, blood$`FII 11`,
-      blood$`FII 16`, blood$`FII 21`))
-
-
-a1 <- ggplot(data = blood, aes(y = `FII 0` ))+
-  geom_boxplot()+
-  ylim(c(0,180))
-a2 <- ggplot(data = blood, aes(y = `FII 6` ))+
-  geom_boxplot()+
-  ylim(c(0,180))
-a3 <- ggplot(data = blood, aes(y = `FII 11` ))+
-  geom_boxplot()+
-  ylim(c(0,180))
-a4 <- ggplot(data = blood, aes(y = `FII 16` ))+
-  geom_boxplot()+
-  ylim(c(0,180))
-a5 <- ggplot(data = blood, aes(y = `FII 21` ))+
-  geom_boxplot()+
-  ylim(c(0,180))
-
-
+data2
+p1 <-ggplot( data = data2,mapping =  aes(x= time, y = log(mean)))+
+  geom_point(aes(y = log(mean)))+
+  geom_errorbar(aes(ymin = log(mean) - log(es), ymax = log(mean) + log(es)), width = 1.2)+
+  geom_line()+
+  xlab("Days")+
+  ylab("Log Factor II")+
+  ylim(c(0,7))
 
 png(filename = "figures/FII.png",
     width = 750, height = 500)
-gridExtra::grid.arrange(a1,a2,a3,a4,a5, nrow= 1)
+p1
 dev.off()
+
+data1$logvalues <- log(data1$values)
+
+model <- lm(logvalues ~ ind, data = data1) 
+anov <- aov(model)
+summary(anov)
+
+data1$sujeto <- factor(rep(1:length(data1$values)))
+
+
+kruskal.test(log(values) ~ ind, data = data1)
+TukeyHSD(data = data1, formula = logvalues ~ ind)
+dunn_test(formula = logvalues ~ ind, data = data1, p.adjust.method = "bonferroni")
+
+
+
+
 
 ##Factor II
 blood$`FV 0`

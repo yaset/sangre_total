@@ -1,0 +1,102 @@
+---
+title: "Sangre Total resultados"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readxl)
+library(plotrix)
+blood <- read_excel("data/Base de datos.xlsx")
+
+```
+
+# Hemoglobina
+
+### Descripcion
+
+```{r data, echo=FALSE}
+data1 <- blood %>%
+  select(`Hb 0`, `Hb 6`,
+         `Hb 11`, `Hb 16`,
+         `Hb 21`)
+data1 <- stack(data1)
+data1$time[data1$ind == "Hb 0"] <- 0
+data1$time[data1$ind == "Hb 6"] <- 6
+data1$time[data1$ind == "Hb 11"] <- 11
+data1$time[data1$ind == "Hb 16"] <- 16
+data1$time[data1$ind == "Hb 21"] <- 21
+
+
+data2 <- data1 %>%
+  group_by(time) %>%
+  summarise(mean = mean(values), sd = sd(values), es = std.error(values),
+            min = min(values), max = max(values), norm = shapiro.test(values)[[2]])
+
+data2
+
+```
+### Grafico
+
+```{r , echo=FALSE}
+ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es),
+                width = 0.1)+
+  geom_point()+
+  geom_line()+
+  ylim(c(10,16))+
+  xlab("Days")+
+  ylab("Hemoglobin")+
+  theme_bw()
+```
+
+### ANOVA
+```{r}
+anova(lm(values ~ ind, data = data1))
+```
+
+# Plaquetas
+
+### Descripcion
+
+```{r , echo=FALSE}
+data1 <- blood %>%
+  select(`Plt 0`, `Plt 6`,
+         `Plt 11`, `Plt 16`,
+         `Plt 21`)
+data1 <- stack(data1)
+data1$time[data1$ind == "Plt 0"] <- 0
+data1$time[data1$ind == "Plt 6"] <- 6
+data1$time[data1$ind == "Plt 11"] <- 11
+data1$time[data1$ind == "Plt 16"] <- 16
+data1$time[data1$ind == "Plt 21"] <- 21
+
+
+data2 <- data1 %>%
+  group_by(time) %>%
+  summarise(mean = mean(values), sd = sd(values), es = std.error(values),
+            min = min(values), max = max(values), norm = shapiro.test(values)[[2]])
+
+data2
+
+```
+### Grafico
+
+```{r , echo=FALSE}
+ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es),
+                width = 0.1)+
+  geom_point()+
+  geom_line()+
+  ylim(c(0,270000))+
+  xlab("Days")+
+  ylab("Plaquetas")+
+  theme_bw()
+```
+
+### ANOVA
+```{r}
+anova(lm(values ~ ind, data = data1))
+```
+
