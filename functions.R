@@ -5,6 +5,8 @@ library(plotrix)
 library(rstatix)
 library(multcompView)
 library(xlsx)
+library(tinytex)
+
 
 ####Funcion para data
 data_base <- function(chara) {
