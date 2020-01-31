@@ -1,0 +1,730 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Reportes},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Reportes}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{proyecto-sangre-total-fvl-201920}{%
+\section{Proyecto: Sangre total --
+FVL-2019/20}\label{proyecto-sangre-total-fvl-201920}}
+
+\hypertarget{statistics-analysis-v.1.0-date-16-01-2020}{%
+\paragraph{Statistics analysis: V.1.0 Date:
+16-01-2020}\label{statistics-analysis-v.1.0-date-16-01-2020}}
+
+\hypertarget{author-edgar-yaset-caicedo-httpsgithub.comyaset}{%
+\paragraph{\texorpdfstring{@author: Edgar Yaset Caicedo --
+\url{https://github.com/yaset}}{@author: Edgar Yaset Caicedo -- https://github.com/yaset}}\label{author-edgar-yaset-caicedo-httpsgithub.comyaset}}
+
+\hypertarget{hemoglobina}{%
+\subsection{Hemoglobina}\label{hemoglobina}}
+
+\hypertarget{description}{%
+\subsubsection{Description}\label{description}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0  12.4   12.0  2     1.29 0.290  1.66  10.6  15      0.19
+## 2     6  11.9   12    1.68  1.84 0.41   3.4    7.8  14.6    0.13
+## 3    11  12.4   12    2.05  1.31 0.290  1.71  10.5  15      0.15
+## 4    16  12.3   11.8  2.3   1.49 0.33   2.21   9.8  14.9    0.33
+## 5    21  12.8   12.4  2.22  1.47 0.33   2.17  10.5  15.4    0.3
+\end{verbatim}
+
+\hypertarget{prueba-de-anova}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df  Sum Sq Mean Sq F value Pr(>F)
+## factor(ind)  4   9.918  2.4794  1.1131  0.355
+## Residuals   95 211.603  2.2274               
+## 
+## $tunkey
+## [1] NA
+## 
+## $Kruskal_bonfe
+## [1] NA
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\hypertarget{hematocrito}{%
+\subsection{Hematocrito}\label{hematocrito}}
+
+\hypertarget{description-1}{%
+\subsubsection{Description}\label{description-1}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0  38.1   37    5.73  3.73  0.83  13.9  32    45.2    0.15
+## 2     6  36.7   36.4  6.1   5.67  1.27  32.1  24.8  44.9    0.16
+## 3    11  39.1   37.8  6.23  4.13  0.92  17.1  31.4  46.8    0.13
+## 4    16  39.0   38.1  7.38  4.65  1.04  21.6  32.3  46.6    0.19
+## 5    21  41.2   39.6  7.3   5.02  1.12  25.2  33.1  51.6    0.45
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-1}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-1}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df  Sum Sq Mean Sq F value  Pr(>F)  
+## factor(ind)  4  210.32  52.581  2.3926 0.05598 .
+## Residuals   95 2087.74  21.976                  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## $tunkey
+## [1] NA
+## 
+## $Kruskal_bonfe
+## [1] NA
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\hypertarget{plaquetas}{%
+\section{Plaquetas}\label{plaquetas}}
+
+\hypertarget{description-2}{%
+\subsubsection{Description}\label{description-2}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time   mean median   IQR     sd     es         var    min    max shapiro
+##   <dbl>  <dbl>  <dbl> <dbl>  <dbl>  <dbl>       <dbl>  <dbl>  <dbl>   <dbl>
+## 1     0 189150 187000 48250 36582.  8180. 1338239474. 130000 264000    0.82
+## 2     6  92150  82000 79000 50913. 11384. 2592134211.  21000 204000    0.37
+## 3    11  89700  79000 38500 33309.  7448. 1109484211.  40000 181000    0.08
+## 4    16  76600  71000 16750 20197.  4516.  407936842.  52000 134000    0.02
+## 5    21  96100  95000 15250 16251.  3634.  264094737.  64000 143000    0.05
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-2}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-2}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df     Sum Sq    Mean Sq F value    Pr(>F)    
+## factor(ind)  4 1.6593e+11 4.1481e+10  36.311 < 2.2e-16 ***
+## Residuals   95 1.0853e+11 1.1424e+09                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## $tunkey
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = model)
+## 
+## $`factor(ind)`
+##                  diff        lwr       upr     p adj
+## Plt 6-Plt 0    -97000 -126722.46 -67277.54 0.0000000
+## Plt 11-Plt 0   -99450 -129172.46 -69727.54 0.0000000
+## Plt 16-Plt 0  -112550 -142272.46 -82827.54 0.0000000
+## Plt 21-Plt 0   -93050 -122772.46 -63327.54 0.0000000
+## Plt 11-Plt 6    -2450  -32172.46  27272.46 0.9993774
+## Plt 16-Plt 6   -15550  -45272.46  14172.46 0.5940630
+## Plt 21-Plt 6     3950  -25772.46  33672.46 0.9959605
+## Plt 16-Plt 11  -13100  -42822.46  16622.46 0.7364939
+## Plt 21-Plt 11    6400  -23322.46  36122.46 0.9749510
+## Plt 21-Plt 16   19500  -10222.46  49222.46 0.3657755
+## 
+## 
+## $Kruskal_bonfe
+## # A tibble: 10 x 9
+##    .y.    group1 group2    n1    n2 statistic        p        p.adj p.adj.signif
+##  * <chr>  <chr>  <chr>  <int> <int>     <dbl>    <dbl>        <dbl> <chr>       
+##  1 values Plt 0  Plt 6     20    20    -5.07  4.05e- 7      4.05e-6 ****        
+##  2 values Plt 0  Plt 11    20    20    -5.19  2.14e- 7      2.14e-6 ****        
+##  3 values Plt 0  Plt 16    20    20    -6.34  2.31e-10      2.31e-9 ****        
+##  4 values Plt 0  Plt 21    20    20    -4.04  5.36e- 5      5.36e-4 ***         
+##  5 values Plt 6  Plt 11    20    20    -0.120 9.05e- 1      1.00e+0 ns          
+##  6 values Plt 6  Plt 16    20    20    -1.27  2.03e- 1      1.00e+0 ns          
+##  7 values Plt 6  Plt 21    20    20     1.03  3.04e- 1      1.00e+0 ns          
+##  8 values Plt 11 Plt 16    20    20    -1.15  2.49e- 1      1.00e+0 ns          
+##  9 values Plt 11 Plt 21    20    20     1.15  2.51e- 1      1.00e+0 ns          
+## 10 values Plt 16 Plt 21    20    20     2.30  2.14e- 2      2.14e-1 ns
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\hypertarget{fibrinogeno}{%
+\section{Fibrinogeno}\label{fibrinogeno}}
+
+\hypertarget{description-3}{%
+\subsubsection{Description}\label{description-3}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0  252.   249   50.8  49.4 11.0  2440.   161   368    0.63
+## 2     6  238.   232.  43.5  44.0  9.83 1934.   194   378    0   
+## 3    11  237.   230   42.8  42.4  9.48 1799.   194   339    0.01
+## 4    16  237.   229   51.8  50.2 11.2  2516.   184   381    0.01
+## 5    21  225.   217   37.2  43.7  9.77 1909.   178   360    0
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-3}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-3}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df Sum Sq Mean Sq F value Pr(>F)
+## factor(ind)  4   6898  1724.5  0.8136 0.5196
+## Residuals   95 201365  2119.6               
+## 
+## $tunkey
+## [1] NA
+## 
+## $Kruskal_bonfe
+## [1] NA
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\hypertarget{factor-ii}{%
+\section{Factor II}\label{factor-ii}}
+
+\hypertarget{description-4}{%
+\subsubsection{Description}\label{description-4}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0  92.4   90.5  15.6  12.5  2.8   157.  71.8  120     0.73
+## 2     6  84.8   79.3  13.4  22.4  5.01  502.  64.6  170.    0   
+## 3    11  80.7   76.4  23.2  15.0  3.35  224.  62.3  120     0.05
+## 4    16  79.7   75.2  18.0  15.4  3.44  237.  60.5  123.    0.02
+## 5    21  68.3   61.1  19.8  14.4  3.23  209.  53.1  106.    0
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-4}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-4}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df  Sum Sq Mean Sq F value    Pr(>F)    
+## factor(ind)  4  6161.4 1540.36  5.7983 0.0003217 ***
+## Residuals   95 25237.4  265.66                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## $tunkey
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = model)
+## 
+## $`factor(ind)`
+##                  diff      lwr       upr     p adj
+## FII 6-FII 0    -7.555 -21.8881  6.778098 0.5870438
+## FII 11-FII 0  -11.705 -26.0381  2.628098 0.1634958
+## FII 16-FII 0  -12.715 -27.0481  1.618098 0.1070188
+## FII 21-FII 0  -24.115 -38.4481 -9.781902 0.0000921
+## FII 11-FII 6   -4.150 -18.4831 10.183098 0.9284329
+## FII 16-FII 6   -5.160 -19.4931  9.173098 0.8542330
+## FII 21-FII 6  -16.560 -30.8931 -2.226902 0.0150937
+## FII 16-FII 11  -1.010 -15.3431 13.323098 0.9996652
+## FII 21-FII 11 -12.410 -26.7431  1.923098 0.1221534
+## FII 21-FII 16 -11.400 -25.7331  2.933098 0.1843059
+## 
+## 
+## $Kruskal_bonfe
+## # A tibble: 10 x 9
+##    .y.    group1 group2    n1    n2 statistic           p     p.adj p.adj.signif
+##  * <chr>  <chr>  <chr>  <int> <int>     <dbl>       <dbl>     <dbl> <chr>       
+##  1 values FII 0  FII 6     20    20    -2.01  0.0439        4.39e-1 ns          
+##  2 values FII 0  FII 11    20    20    -2.51  0.0122        1.22e-1 ns          
+##  3 values FII 0  FII 16    20    20    -2.76  0.00570       5.70e-2 ns          
+##  4 values FII 0  FII 21    20    20    -5.12  0.000000306   3.06e-6 ****        
+##  5 values FII 6  FII 11    20    20    -0.491 0.624         1.00e+0 ns          
+##  6 values FII 6  FII 16    20    20    -0.750 0.453         1.00e+0 ns          
+##  7 values FII 6  FII 21    20    20    -3.11  0.00190       1.90e-2 *           
+##  8 values FII 11 FII 16    20    20    -0.259 0.796         1.00e+0 ns          
+##  9 values FII 11 FII 21    20    20    -2.61  0.00894       8.94e-2 ns          
+## 10 values FII 16 FII 21    20    20    -2.36  0.0185        1.85e-1 ns
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\hypertarget{factor-v}{%
+\section{Factor V}\label{factor-v}}
+
+\hypertarget{description-5}{%
+\subsubsection{Description}\label{description-5}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0  79.8   83.7  23.7 16.3   3.65 267.   49.1 110      0.69
+## 2     6  69.4   70.6  22.0 15.2   3.41 233.   45.3  99.8    0.84
+## 3    11  62.5   65.4  19.8 13.5   3.03 183.   35.8  82.7    0.56
+## 4    16  46.2   42.7  15.7 10.4   2.33 108.   26.1  63.3    0.43
+## 5    21  41.8   41.0  12.6  9.06  2.03  82.1  23.3  58.2    0.91
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-5}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-5}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df Sum Sq Mean Sq F value    Pr(>F)    
+## factor(ind)  4  20169  5042.3  28.875 1.046e-15 ***
+## Residuals   95  16589   174.6                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## $tunkey
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = model)
+## 
+## $`factor(ind)`
+##                diff       lwr        upr     p adj
+## FV 6-FV 0   -10.460 -22.08065   1.160651 0.0985256
+## FV 11-FV 0  -17.335 -28.95565  -5.714349 0.0006833
+## FV 16-FV 0  -33.600 -45.22065 -21.979349 0.0000000
+## FV 21-FV 0  -38.040 -49.66065 -26.419349 0.0000000
+## FV 11-FV 6   -6.875 -18.49565   4.745651 0.4726885
+## FV 16-FV 6  -23.140 -34.76065 -11.519349 0.0000027
+## FV 21-FV 6  -27.580 -39.20065 -15.959349 0.0000000
+## FV 16-FV 11 -16.265 -27.88565  -4.644349 0.0016936
+## FV 21-FV 11 -20.705 -32.32565  -9.084349 0.0000306
+## FV 21-FV 16  -4.440 -16.06065   7.180651 0.8251321
+## 
+## 
+## $Kruskal_bonfe
+## # A tibble: 10 x 9
+##    .y.    group1 group2    n1    n2 statistic        p        p.adj p.adj.signif
+##  * <chr>  <chr>  <chr>  <int> <int>     <dbl>    <dbl>        <dbl> <chr>       
+##  1 values FV 0   FV 6      20    20    -1.40  1.63e- 1      1.00e+0 ns          
+##  2 values FV 0   FV 11     20    20    -2.48  1.30e- 2      1.30e-1 ns          
+##  3 values FV 0   FV 16     20    20    -5.36  8.26e- 8      8.26e-7 ****        
+##  4 values FV 0   FV 21     20    20    -6.19  6.12e-10      6.12e-9 ****        
+##  5 values FV 6   FV 11     20    20    -1.09  2.77e- 1      1.00e+0 ns          
+##  6 values FV 6   FV 16     20    20    -3.97  7.31e- 5      7.31e-4 ***         
+##  7 values FV 6   FV 21     20    20    -4.79  1.65e- 6      1.65e-5 ****        
+##  8 values FV 11  FV 16     20    20    -2.88  4.00e- 3      4.00e-2 *           
+##  9 values FV 11  FV 21     20    20    -3.70  2.12e- 4      2.12e-3 **          
+## 10 values FV 16  FV 21     20    20    -0.826 4.09e- 1      1.00e+0 ns
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\hypertarget{factor-vii}{%
+\subsection{Factor VII}\label{factor-vii}}
+
+\hypertarget{description-6}{%
+\subsubsection{Description}\label{description-6}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0  83.2   80.4  22.5  24.2  5.41  586.  25.5  145     0.41
+## 2     6  73.2   58.0  20.4  65.1 14.6  4235.  40.1  344.    0   
+## 3    11  68.3   58.7  15.1  48   10.7  2304.  37.8  266.    0   
+## 4    16  63.8   54.6  14.7  34.6  7.74 1200.  39.4  201.    0   
+## 5    21  56.6   51.6  18    29.2  6.52  850.  34.1  171.    0
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-6}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-6}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df Sum Sq Mean Sq F value Pr(>F)
+## factor(ind)  4   8011  2002.7  1.0915 0.3653
+## Residuals   95 174304  1834.8               
+## 
+## $tunkey
+## [1] NA
+## 
+## $Kruskal_bonfe
+## [1] NA
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\hypertarget{factor-viii}{%
+\section{Factor VIII}\label{factor-viii}}
+
+\hypertarget{description-7}{%
+\subsubsection{Description}\label{description-7}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0  83.2   80.4  22.5  24.2  5.41  586.  25.5  145     0.41
+## 2     6  73.2   58.0  20.4  65.1 14.6  4235.  40.1  344.    0   
+## 3    11  68.3   58.7  15.1  48   10.7  2304.  37.8  266.    0   
+## 4    16  63.8   54.6  14.7  34.6  7.74 1200.  39.4  201.    0   
+## 5    21  56.6   51.6  18    29.2  6.52  850.  34.1  171.    0
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-7}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-7}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df Sum Sq Mean Sq F value    Pr(>F)    
+## factor(ind)  4  85964 21491.0  32.831 < 2.2e-16 ***
+## Residuals   95  62187   654.6                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## $tunkey
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = model)
+## 
+## $`factor(ind)`
+##                      diff       lwr        upr     p adj
+## FVIII 6-FVIII 0   -64.600  -87.0992 -42.100797 0.0000000
+## FVIII 11-FVIII 0  -73.285  -95.7842 -50.785797 0.0000000
+## FVIII 16-FVIII 0  -78.085 -100.5842 -55.585797 0.0000000
+## FVIII 21-FVIII 0  -73.925  -96.4242 -51.425797 0.0000000
+## FVIII 11-FVIII 6   -8.685  -31.1842  13.814203 0.8196760
+## FVIII 16-FVIII 6  -13.485  -35.9842   9.014203 0.4593242
+## FVIII 21-FVIII 6   -9.325  -31.8242  13.174203 0.7780290
+## FVIII 16-FVIII 11  -4.800  -27.2992  17.699203 0.9757868
+## FVIII 21-FVIII 11  -0.640  -23.1392  21.859203 0.9999910
+## FVIII 21-FVIII 16   4.160  -18.3392  26.659203 0.9857614
+## 
+## 
+## $Kruskal_bonfe
+## # A tibble: 10 x 9
+##    .y.    group1  group2     n1    n2 statistic         p     p.adj p.adj.signif
+##  * <chr>  <chr>   <chr>   <int> <int>     <dbl>     <dbl>     <dbl> <chr>       
+##  1 values FVIII 0 FVIII 6    20    20   -4.09     4.36e-5   4.36e-4 ***         
+##  2 values FVIII 0 FVIII …    20    20   -5.11     3.23e-7   3.23e-6 ****        
+##  3 values FVIII 0 FVIII …    20    20   -5.87     4.36e-9   4.36e-8 ****        
+##  4 values FVIII 0 FVIII …    20    20   -5.19     2.06e-7   2.06e-6 ****        
+##  5 values FVIII 6 FVIII …    20    20   -1.02     3.07e-1   1.00e+0 ns          
+##  6 values FVIII 6 FVIII …    20    20   -1.78     7.47e-2   7.47e-1 ns          
+##  7 values FVIII 6 FVIII …    20    20   -1.11     2.69e-1   1.00e+0 ns          
+##  8 values FVIII … FVIII …    20    20   -0.760    4.47e-1   1.00e+0 ns          
+##  9 values FVIII … FVIII …    20    20   -0.0845   9.33e-1   1.00e+0 ns          
+## 10 values FVIII … FVIII …    20    20    0.676    4.99e-1   1.00e+0 ns
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\hypertarget{factor-ix}{%
+\section{Factor IX}\label{factor-ix}}
+
+\hypertarget{description-8}{%
+\subsubsection{Description}\label{description-8}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0 107.   101.   18    16.4  3.68  270.  81.3  145.    0.03
+## 2     6  97.8   94.2  17.8  13.8  3.08  190.  79.8  133.    0.14
+## 3    11  94.5   92.6  10.8  13.9  3.11  193.  72.6  132.    0.16
+## 4    16  89.1   86.6  22.3  14.4  3.23  208.  69.9  124.    0.17
+## 5    21  90.5   89.2  12.4  13.2  2.95  173.  62.7  118.    0.63
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-8}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-8}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df  Sum Sq Mean Sq F value   Pr(>F)   
+## factor(ind)  4  4052.9  1013.2  4.8925 0.001246 **
+## Residuals   95 19674.1   207.1                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## $tunkey
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = model)
+## 
+## $`factor(ind)`
+##                  diff      lwr        upr     p adj
+## FIX 6-FIX 0    -9.185 -21.8401  3.4701024 0.2652811
+## FIX 11-FIX 0  -12.390 -25.0451  0.2651024 0.0580052
+## FIX 16-FIX 0  -17.850 -30.5051 -5.1948976 0.0015254
+## FIX 21-FIX 0  -16.445 -29.1001 -3.7898976 0.0043276
+## FIX 11-FIX 6   -3.205 -15.8601  9.4501024 0.9550525
+## FIX 16-FIX 6   -8.665 -21.3201  3.9901024 0.3223128
+## FIX 21-FIX 6   -7.260 -19.9151  5.3951024 0.5040742
+## FIX 16-FIX 11  -5.460 -18.1151  7.1951024 0.7514842
+## FIX 21-FIX 11  -4.055 -16.7101  8.6001024 0.8995559
+## FIX 21-FIX 16   1.405 -11.2501 14.0601024 0.9979930
+## 
+## 
+## $Kruskal_bonfe
+## # A tibble: 10 x 9
+##    .y.    group1 group2    n1    n2 statistic        p   p.adj p.adj.signif
+##  * <chr>  <chr>  <chr>  <int> <int>     <dbl>    <dbl>   <dbl> <chr>       
+##  1 values FIX 0  FIX 6     20    20    -1.88  0.0600   0.600   ns          
+##  2 values FIX 0  FIX 11    20    20    -2.56  0.0105   0.105   ns          
+##  3 values FIX 0  FIX 16    20    20    -3.77  0.000162 0.00162 **          
+##  4 values FIX 0  FIX 21    20    20    -3.40  0.000677 0.00677 **          
+##  5 values FIX 6  FIX 11    20    20    -0.679 0.497    1       ns          
+##  6 values FIX 6  FIX 16    20    20    -1.89  0.0585   0.585   ns          
+##  7 values FIX 6  FIX 21    20    20    -1.52  0.129    1       ns          
+##  8 values FIX 11 FIX 16    20    20    -1.21  0.225    1       ns          
+##  9 values FIX 11 FIX 21    20    20    -0.839 0.401    1       ns          
+## 10 values FIX 16 FIX 21    20    20     0.373 0.709    1       ns
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\hypertarget{factor-x}{%
+\section{Factor X}\label{factor-x}}
+
+\hypertarget{description-9}{%
+\subsubsection{Description}\label{description-9}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0  83.3   80.0  12.4  16.9  3.78  285.  57.8  123.   0.21 
+## 2     6  83.9   80.2  17.2  23.3  5.22  545.  58.2  159    0    
+## 3    11  83.4   79.0  21.8  19.1  4.27  365.  56.6  137.   0.11 
+## 4    16  77.8   73.7  16.4  17.4  3.89  302.  52.5  118.   0.15 
+## 5    21  75.1   72.2  21.6  15.6  3.48  242.  53.1  106.   0.290
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-9}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-9}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df Sum Sq Mean Sq F value Pr(>F)
+## factor(ind)  4   1302  325.42  0.9355 0.4469
+## Residuals   95  33046  347.85               
+## 
+## $tunkey
+## [1] NA
+## 
+## $Kruskal_bonfe
+## [1] NA
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\hypertarget{factor-xi}{%
+\section{Factor XI}\label{factor-xi}}
+
+\hypertarget{description-10}{%
+\subsubsection{Description}\label{description-10}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0  97    100.   27.2  27.0  6.03  727.   5.5  126.    0   
+## 2     6  98.3  102.   18.0  15.5  3.47  241.  64    121.    0.27
+## 3    11  96.8   97.8  16.7  14.8  3.31  219.  62.8  125.    0.82
+## 4    16  95.4  100.   14.7  13.5  3.01  182.  64.2  119.    0.31
+## 5    21 102.   101.   22.6  16.6  3.71  275.  75.6  141.    0.9
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-10}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-10}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df Sum Sq Mean Sq F value Pr(>F)
+## factor(ind)  4    505  126.24  0.3841 0.8195
+## Residuals   95  31224  328.67               
+## 
+## $tunkey
+## [1] NA
+## 
+## $Kruskal_bonfe
+## [1] NA
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\hypertarget{pcc}{%
+\section{PCC}\label{pcc}}
+
+\hypertarget{description-11}{%
+\subsubsection{Description}\label{description-11}}
+
+\begin{verbatim}
+## # A tibble: 5 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0  89.4   89.5  16    14    3.13  196.    70   126    0.18
+## 2     6  91.3   83.5  15.5  21.8  4.87  475.    72   168    0   
+## 3    11  80.4   76    12.5  18.6  4.16  346.    62   147    0   
+## 4    16  81.4   76.5  14.2  18.8  4.22  355.    65   148    0   
+## 5    21  77.4   74.5  18.5  18.4  4.12  340.    56   142    0
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-11}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-11}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df Sum Sq Mean Sq F value  Pr(>F)  
+## factor(ind)  4   2900  724.99  2.1175 0.08459 .
+## Residuals   95  32526  342.38                  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## $tunkey
+## [1] NA
+## 
+## $Kruskal_bonfe
+## [1] NA
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-24-1.pdf} \#
+TROMBOELASTOGRAFIA \#\# R \#\#\# Description
+
+\begin{verbatim}
+## # A tibble: 4 x 10
+##    time  mean median   IQR    sd    es   var   min   max shapiro
+##   <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>   <dbl>
+## 1     0 11.3   10.9   2.65  1.98  0.44  3.92   7.7  15.9    0.5 
+## 2     6 10.2   11.0   4.8   3.08  0.69  9.47   4.2  16      0.45
+## 3    11 10.1   10.2   2.65  1.98  0.44  3.9    7.2  13.8    0.26
+## 4    16  9.39   9.75  2.63  2.17  0.49  4.73   5.9  13.3    0.17
+\end{verbatim}
+
+\hypertarget{prueba-de-anova-12}{%
+\subsubsection{Prueba de ANOVA}\label{prueba-de-anova-12}}
+
+\begin{verbatim}
+## $anova
+## Analysis of Variance Table
+## 
+## Response: values
+##             Df Sum Sq Mean Sq F value  Pr(>F)  
+## factor(ind)  3  36.99 12.3298  2.2406 0.09034 .
+## Residuals   76 418.22  5.5029                  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## $tunkey
+## [1] NA
+## 
+## $Kruskal_bonfe
+## [1] NA
+\end{verbatim}
+
+\includegraphics{anovas_files/figure-latex/unnamed-chunk-26-1.pdf}
+
+\end{document}

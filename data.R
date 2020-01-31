@@ -1,11 +1,10 @@
 rm(list = ls())
 source("functions.R")
-install.packages("rstatix")
-install.packages("multcompView")
+
 ###Data
 blood <- read_excel("data/Base de datos.xlsx")
 blood <- read_excel("C:/Users/eyase/Downloads/Base de datos.xlsx")
-
+summary(blood$`Leucos 0`)
 
 ###Hemoglobin
 #data
@@ -35,9 +34,8 @@ R <- R %>%
 
 
 
-
-
-resume(M)
+resume(R)
+anova_te(R)
 anova_te(M)
 
 
@@ -46,7 +44,7 @@ anova_te(M)
 resume(angle)
 anova_te(angle)
 
-resume(R)
+resume(M)
 anova_te(R)
 
 
@@ -61,7 +59,7 @@ p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
 
 p1
 data2 <- resume(M)
-p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+p2 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
@@ -72,17 +70,16 @@ p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
 p1
 
 data2 <- resume(R)
-p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+p3 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
   xlim(c(0,16))+
-  ylim(c(0,20))+
-  geom_hline(aes(yintercept = ))
-
+  ylim(c(0,15))
+  p1
 
 resume(R)
-
+gridExtra::grid.arrange(p1,p2,p3,nrow = 1)
 
 p1  
 xlab("Days")+

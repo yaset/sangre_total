@@ -1,9 +1,9 @@
 ---
 title: "Reportes"
 output:
-  pdf_document: default
-  word_document: default
   html_document: default
+  word_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -324,6 +324,91 @@ data2 <- resume(PCC)
   ylim(c(0,150))+
   xlab("Days")+
   ylab("PCC")+
+  theme_bw()+
+  theme(axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text = element_text(size = 14))
+
+```
+
+# TROMBOELASTOGRAFIA 
+## R
+### Description
+```{r , echo = FALSE }
+blood <- read_excel("C:/Users/eyase/Downloads/Base de datos.xlsx")
+R <- data_base("TEG R")
+R <- R %>%
+  filter(ind != "TEG R 21")
+round(resume(R),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(R)
+data2 <- resume(R)
+ ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_point(aes(y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
+  geom_line()+
+  ylim(c(0,20))+
+  xlab("Days")+
+  ylab("tIME R")+
+  theme_bw()+
+  theme(axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text = element_text(size = 14))
+
+```
+
+## ANGLE
+
+### Description
+```{r , echo = FALSE }
+blood <- read_excel("C:/Users/eyase/Downloads/Base de datos.xlsx")
+angle <- data_base("TEG angle ") 
+angle <- angle %>%
+  filter(ind != "TEG angle 21")
+round(resume(angle),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(angle)
+data2 <- resume(angle)
+ ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_point(aes(y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
+  geom_line()+
+  ylim(c(0,70))+
+  xlab("Days")+
+  ylab("angle")+
+  theme_bw()+
+  theme(axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        axis.text = element_text(size = 14))
+
+```
+## MA
+### Description
+```{r , echo = FALSE }
+blood <- read_excel("C:/Users/eyase/Downloads/Base de datos.xlsx")
+M <- data_base("TEG MA")
+M <- M %>%
+  filter(ind != "TEG MA 21")
+round(resume(M),2)
+```
+
+### Prueba de ANOVA
+```{r, echo= FALSE}
+anova_te(M)
+data2 <- resume(M)
+ ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_point(aes(y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
+  geom_line()+
+  ylim(c(0,70))+
+  xlab("Days")+
+  ylab("MA")+
   theme_bw()+
   theme(axis.title.x = element_text(size = 14),
         axis.title.y = element_text(size = 14),
