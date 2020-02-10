@@ -3,6 +3,8 @@ source("functions.R")
 
 ###Data
 blood <- read_excel("data/Base de datos.xlsx")
+blood <- read_excel("C:/Users/eyase/Downloads/Base de datos.xlsx")
+summary(blood$`Leucos 0`)
 
 ###Hemoglobin
 #data
@@ -10,6 +12,79 @@ blood <- read_excel("data/Base de datos.xlsx")
 Hb <- data_base("Hb")
 resume(Hb)
 anova_te(Hb)
+
+##### 4 bolsas vs 1, almacenamiento, facilidad de colocar al paciente, el tiempo de transfusion, el numero de cateteres
+##### mas riesgo de rx transfusionales menos donadores, facilidad de acceso, proyeccion de costos, ventajas y desventajas, almacenamiento 
+##### 
+blood$`TEG angle 1`
+angle <- data_base("TEG angle ") 
+angle <- angle %>%
+  filter(ind != "TEG angle 21")
+  
+
+blood$`TEG MA 1`
+M <- data_base("TEG MA")
+M <- M %>%
+  filter(ind != "TEG MA 21")
+
+blood$`TEG R 1`
+R <- data_base("TEG R")
+R <- R %>%
+  filter(ind != "TEG R 21")
+
+
+
+resume(R)
+anova_te(R)
+anova_te(M)
+
+
+
+
+resume(angle)
+anova_te(angle)
+
+resume(M)
+anova_te(R)
+
+
+
+data2 <- resume(angle)
+p1 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_point(aes(y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
+  geom_line()+
+  xlim(c(0,16))+
+  ylim(c(0,100))
+
+p1
+data2 <- resume(M)
+p2 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_point(aes(y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
+  geom_line()+
+  xlim(c(0,16))+
+  ylim(c(0,100))
+
+
+p1
+
+data2 <- resume(R)
+p3 <-ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+  geom_point(aes(y = mean))+
+  geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
+  geom_line()+
+  xlim(c(0,16))+
+  ylim(c(0,15))
+  p1
+
+resume(R)
+gridExtra::grid.arrange(p1,p2,p3,nrow = 1)
+
+p1  
+xlab("Days")+
+  ylab("Hemoglobin g/dL")+
+  
 
 
 ###Graphic
