@@ -1,22 +1,6 @@
 library(ggplot2)
 library(cowplot)
 
-
-hb2$ind <- as.factor(hb2$ind)
-levels(hb2$ind) <- c("0", "6", "11", "16", "21")
-hl <- hb2 %>%
-  group_by(ind) %>%
-  summarise(me = median(values))
-
-a1 <- ggplot(data = hb2)+
-  geom_boxplot(aes(x = ind, y = values), width = 0.2, fill = "gray")+
-  geom_point(data = hl, aes(x = ind, y = me), inherit.aes = FALSE)+
-  geom_line(data = hl, aes(x = ind, y = me, group = 1), inherit.aes = FALSE)+
-  ylim(c(0,18))+
-  theme_cowplot()
-
-
-
 #Plaquetas
 Plt <- data_base("Plt")
 levels(Plt$ind) <- c("0", "6", "11", "16", "21")
@@ -32,7 +16,7 @@ a2 <- ggplot(data = Plt)+
   
 
 
-
+a2
 
 #Fibrinogeno
 Fibri <- data_base("Fibri")
@@ -52,9 +36,8 @@ gridExtra::grid.arrange(a1,a2,a3, nrow = 1)
 
 
 
-
-
-
+aa <- grid.arrange(a1,b1,c1,d1,bottom = "Days")
+grid.arrange(e1,aa, nrow = 1)
 ##Factor II
 FII <- data_base("FII")
 
@@ -79,18 +62,14 @@ FVII_i <- FVII %>%
 
 
 ggplot()+
-  geom_point(data = FII_i, aes(x = ind, y = me), 
-               alpha = 0.3, width = 0.1)+
-  geom_line(data = FII_i, aes(x = ind, y = me, group = 1), inherit.aes = FALSE, color = "Red", size = 1,
-            linetype = "dashed")+
-  geom_point(data = FV_i, aes(x = ind, y = me), 
-               alpha = 0.3,width = 0.1)+
-  geom_line(data = FV_i, aes(x = ind, y = me, group = 1), inherit.aes = FALSE, color = "Blue", size = 1,
-            linetype = "dashed")+
-  geom_point(data = FVII_i, aes(x = ind, y = me), 
-               alpha = 0.3,width = 0.1)+
-    geom_line(data = FVII_i, aes(x = ind, y = me, group = 1), inherit.aes = FALSE, color = "Green", size = 1,
-            linetype = "dashed")+
-  
+  geom_boxplot(data = FII, aes(x = ind, y = values), width = 0.2)+
+  geom_point(data = FII_i, aes(x = ind, y = me))+
+  xlab("Factor II")+
   ylim(c(0,100))
-
+ 
+ggplot()+
+  geom_point(data = FII_i, aes(x = ind, y = me), 
+             alpha = 0.3, width = 0.1)+
+  geom_boxplot(data = FII, aes(x = ind, y = values), width = 0.2)+
+  xlab("Factor II")+
+  ylim(c(0,100))

@@ -1,6 +1,6 @@
 rm(list = ls())
 source("functions.R")
-
+library(cowplot)
 ###Data
 blood <- read_excel("data/Base de datos.xlsx")
 blood <- read_excel("C:/Users/eyase/Downloads/Base de datos.xlsx")
@@ -136,18 +136,18 @@ dev.off()
 #Plaquetas
 Plt <- data_base("Plt")
 data2 <- resume(Plt)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+e1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
-  ylim(c(0,300000))+
   xlab("Days")+
-  ylab("Plaquetas")+
-  theme_bw()+
+  ylab("Plaquetas/uL")+
+  theme_cowplot()+
+  scale_y_continuous(breaks = seq(0,300000, by = 50000), limits = c(0,300000))+
   theme(axis.title.x = element_text(size = 14),
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
-
+e1
 png(filename = "figures/plaquetas.png",
     width = 750, height = 500)
 p1
@@ -177,17 +177,17 @@ dev.off()
 ##Factor II
 FII <- data_base("FII")
 data2 <- resume(FII)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+a1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
   ylim(c(0,100))+
-  xlab("Days")+
-  ylab("Factor II")+
-  theme_bw()+
+  xlab("")+
+  ylab("Factor II %")+
   theme(axis.title.x = element_text(size = 14),
         axis.title.y = element_text(size = 14),
-        axis.text = element_text(size = 14))
+        axis.text = element_text(size = 14))+
+  theme_cowplot()
 
 png(filename = "figures/FII.png",
     width = 750, height = 500)
@@ -197,17 +197,17 @@ dev.off()
 ## Factor V
 FV <- data_base("\\FV\\b")
 data2 <- resume(FV)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+b1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
   ylim(c(0,100))+
-  xlab("Days")+
-  ylab("Factor V")+
-  theme_bw()+
+  xlab("")+
+  ylab("Factor V %")+
   theme(axis.title.x = element_text(size = 14),
         axis.title.y = element_text(size = 14),
-        axis.text = element_text(size = 14))
+        axis.text = element_text(size = 14))+
+  theme_cowplot()
 
 png(filename = "figures/FV.png",
     width = 750, height = 500)
@@ -217,17 +217,17 @@ dev.off()
 ##Factor VII
 FVII <- data_base("\\FVII\\b")
 data2 <- resume(FVII)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+c1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
   ylim(c(0,100))+
-  xlab("Days")+
-  ylab("Factor VII")+
-  theme_bw()+
+  xlab("")+
+  ylab("Factor VII %")+
   theme(axis.title.x = element_text(size = 14),
         axis.title.y = element_text(size = 14),
-        axis.text = element_text(size = 14))
+        axis.text = element_text(size = 14))+
+  theme_cowplot()
 
 png(filename = "figures/FVII.png",
     width = 750, height = 500)
@@ -277,17 +277,17 @@ dev.off()
 ##Factor X
 FX <- data_base("\\FX\\b")
 data2 <- resume(FX)
-p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
+d1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
-  ylim(c(0,150))+
-  xlab("Days")+
-  ylab("Factor X")+
-  theme_bw()+
+  ylim(c(0,100))+
+  xlab("")+
+  ylab("Factor X %")+
   theme(axis.title.x = element_text(size = 14),
         axis.title.y = element_text(size = 14),
-        axis.text = element_text(size = 14))
+        axis.text = element_text(size = 14))+
+  theme_cowplot()
 
 png(filename = "figures/FX.png",
     width = 750, height = 500)
