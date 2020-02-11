@@ -143,7 +143,7 @@ e1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   xlab("Days")+
   ylab("Plaquetas/uL")+
   theme_cowplot()+
-  scale_y_continuous(breaks = seq(0,300000, by = 50000), limits = c(0,300000))+
+  scale_y_continuous(breaks = seq(50000,250000, by = 50000), limits = c(50000,250000))+
   theme(axis.title.x = element_text(size = 14),
         axis.title.y = element_text(size = 14),
         axis.text = element_text(size = 14))
@@ -181,7 +181,7 @@ a1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
-  ylim(c(0,100))+
+  ylim(c(40,100))+
   xlab("")+
   ylab("Factor II %")+
   theme(axis.title.x = element_text(size = 14),
@@ -189,6 +189,7 @@ a1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
         axis.text = element_text(size = 14))+
   theme_cowplot()
 
+a1
 png(filename = "figures/FII.png",
     width = 750, height = 500)
 p1
@@ -201,7 +202,7 @@ b1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
-  ylim(c(0,100))+
+  ylim(c(40,100))+
   xlab("")+
   ylab("Factor V %")+
   theme(axis.title.x = element_text(size = 14),
@@ -221,7 +222,7 @@ c1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
-  ylim(c(0,100))+
+  ylim(c(40,100))+
   xlab("")+
   ylab("Factor VII %")+
   theme(axis.title.x = element_text(size = 14),
@@ -236,6 +237,11 @@ dev.off()
 
 ##Factor VIII
 FVIII <- data_base("\\FVIII\\b")
+
+
+
+
+
 data2 <- resume(FVIII)
 p1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
@@ -281,7 +287,7 @@ d1 <- ggplot( data = data2,mapping =  aes(x= time, y = mean))+
   geom_point(aes(y = mean))+
   geom_errorbar(aes(ymin = mean - es, ymax = mean + es), width = 2)+
   geom_line()+
-  ylim(c(0,100))+
+  ylim(c(40,100))+
   xlab("")+
   ylab("Factor X %")+
   theme(axis.title.x = element_text(size = 14),
