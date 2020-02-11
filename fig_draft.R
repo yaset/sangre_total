@@ -35,7 +35,7 @@ gridExtra::grid.arrange(a1,a2,a3, nrow = 1)
 
 
 
-
+library(gridExtra)
 aa <- grid.arrange(a1,b1,c1,d1,bottom = "Days")
 grid.arrange(e1,aa, nrow = 1)
 ##Factor II
